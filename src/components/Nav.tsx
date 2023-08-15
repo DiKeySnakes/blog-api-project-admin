@@ -30,11 +30,11 @@ export default function Nav() {
     >
       <Flex>
         <Box>
-          <a href="/blog/blogs_all">
+          <ChakraLink as={ReactRouterLink} to="/blog/blogs_all" mr={15}>
             <Heading mt={2} mb={2}>
               Blog API Project
             </Heading>
-          </a>
+          </ChakraLink>
         </Box>
         <Spacer />
         <Center>
