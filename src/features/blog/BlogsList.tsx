@@ -1,5 +1,6 @@
 import { useGetALLBlogsQuery } from "./blogApiSlice"
 import useTitle from "../../hooks/useTitle"
+import { Link as ReactRouterLink } from "react-router-dom"
 import format from "date-fns/format"
 import ErrorHandler from "../../components/ErrorHandler"
 import {
@@ -13,8 +14,6 @@ import {
   Text,
   Image,
   Box,
-  LinkBox,
-  LinkOverlay,
   Center,
 } from "@chakra-ui/react"
 
@@ -65,7 +64,7 @@ const BlogsList = () => {
     const blogsContent =
       blogs?.length &&
       blogs.map((blog) => (
-        <LinkBox
+        <Box
           key={blog._id}
           id={blog._id}
           as="article"
@@ -91,9 +90,9 @@ const BlogsList = () => {
 
             <Stack>
               <CardBody>
-                <LinkOverlay href={`/blog/${blog._id}`}>
+                <ReactRouterLink to={`/blog/${blog._id}`}>
                   <Heading size="md">{blog.title}</Heading>
-                </LinkOverlay>
+                </ReactRouterLink>
 
                 <Text py="2">{blog.description}</Text>
               </CardBody>
@@ -108,7 +107,7 @@ const BlogsList = () => {
               </CardFooter>
             </Stack>
           </Card>
-        </LinkBox>
+        </Box>
       ))
 
     content = (
