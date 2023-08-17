@@ -82,7 +82,7 @@ function Blog({ id }: { id?: string }) {
           overflow="hidden"
           variant="outline"
         >
-          <Stack>
+          <Stack w="100%">
             <Image
               p={5}
               objectFit="cover"
@@ -95,15 +95,27 @@ function Blog({ id }: { id?: string }) {
               <Text py="2">{data.blog.content}</Text>
             </CardBody>
 
-            <CardFooter>
-              <Box mr={2}>
-                <Text as="b">by MariiaN </Text>
-              </Box>
-              <Box ml={2}>
-                <Text>
-                  {format(new Date(data.blog.createdAt), "dd MMM yyyy")}
-                </Text>
-              </Box>
+            <CardFooter w="100%">
+              <Flex w="100%">
+                <Flex>
+                  <Box mr={2}>
+                    <Text as="b">by MariiaN </Text>
+                  </Box>
+                  <Box ml={2}>
+                    <Text>
+                      {format(new Date(data.blog.createdAt), "dd MMM yyyy")}
+                    </Text>
+                  </Box>
+                </Flex>
+
+                <Spacer />
+
+                <Box>
+                  <ReactRouterLink to={`/blog/update/${data.blog._id}`}>
+                    <Button colorScheme="red">Update</Button>
+                  </ReactRouterLink>
+                </Box>
+              </Flex>
             </CardFooter>
           </Stack>
         </Card>

@@ -62,10 +62,6 @@ const NewUserForm = () => {
     }
   }, [isSuccess, isError, navigate])
 
-  // useEffect(() => {
-  //   if (data) console.log(data)
-  // }, [data])
-
   const onUsernameChanged = (e: React.ChangeEvent<HTMLInputElement>) =>
     setUsername(e.target.value)
   const onEmailChanged = (e: React.ChangeEvent<HTMLInputElement>) =>
@@ -101,7 +97,13 @@ const NewUserForm = () => {
       </Heading>
 
       <form onSubmit={onSaveUserClicked}>
-        <FormControl mt={5} mb={5} isRequired isInvalid={isUsernameError}>
+        <FormControl
+          width="80vw"
+          mt={5}
+          mb={5}
+          isRequired
+          isInvalid={isUsernameError}
+        >
           <FormLabel>Username</FormLabel>
           <Input
             type="text"
@@ -120,7 +122,13 @@ const NewUserForm = () => {
           )}
         </FormControl>
 
-        <FormControl mt={5} mb={5} isRequired isInvalid={isEmailError}>
+        <FormControl
+          width="80vw"
+          mt={5}
+          mb={5}
+          isRequired
+          isInvalid={isEmailError}
+        >
           <FormLabel>Email</FormLabel>
           <Input
             type="email"
@@ -138,7 +146,13 @@ const NewUserForm = () => {
           )}
         </FormControl>
 
-        <FormControl mt={5} mb={5} isRequired isInvalid={isPasswordError}>
+        <FormControl
+          width="80vw"
+          mt={5}
+          mb={5}
+          isRequired
+          isInvalid={isPasswordError}
+        >
           <FormLabel>Password</FormLabel>
           <Input
             type="password"
@@ -157,6 +171,7 @@ const NewUserForm = () => {
         </FormControl>
 
         <FormControl
+          width="80vw"
           mt={5}
           mb={5}
           isRequired

@@ -1,6 +1,6 @@
 import { apiSlice } from "../../app/api/apiSlice"
 
-interface IBlog {
+export interface IBlog {
   _id: string
   image: string
   title: string
@@ -12,7 +12,7 @@ interface IBlog {
   updatedAt: Date
 }
 
-interface IUser {
+export interface IUser {
   username: string
   email: string
   password: string
@@ -20,7 +20,7 @@ interface IUser {
   active: boolean
 }
 
-interface IComment {
+export interface IComment {
   _id: string
   content: string
   blog: string
@@ -29,8 +29,8 @@ interface IComment {
   updatedAt: Date
 }
 
-type BlogsResponse = IBlog[]
-type DetailedBlogResponse = {
+export type BlogsResponse = IBlog[]
+export type DetailedBlogResponse = {
   blog: IBlog
   comments: IComment[]
 }
@@ -83,6 +83,16 @@ export const blogApiSlice = apiSlice.injectEndpoints({
       }),
       invalidatesTags: [{ type: "Blog", id: "LIST" }],
     }),
+    updateBlog: builder.mutation({
+      query: (initialBlog) => ({
+        url: `/blog/update/${initialBlog._id}`,
+        method: "PATCH",
+        body: {
+          ...initialBlog,
+        },
+      }),
+      invalidatesTags: [{ type: "Comment", id: "LIST" }],
+    }),
   }),
 })
 
@@ -90,4 +100,5 @@ export const {
   useGetALLBlogsQuery,
   useGetDetailedBlogQuery,
   useAddNewBlogMutation,
+  useUpdateBlogMutation,
 } = blogApiSlice

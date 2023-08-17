@@ -19,6 +19,8 @@ import {
   Input,
   Button,
   Checkbox,
+  Flex,
+  Spacer,
 } from "@chakra-ui/react"
 
 function Login() {
@@ -107,7 +109,13 @@ function Login() {
       </Text>
 
       <form onSubmit={handleSubmit}>
-        <FormControl mt={5} mb={5} isRequired isInvalid={isUsernameError}>
+        <FormControl
+          width="80vw"
+          mt={5}
+          mb={5}
+          isRequired
+          isInvalid={isUsernameError}
+        >
           <FormLabel>Username</FormLabel>
           <Input
             type="text"
@@ -126,7 +134,13 @@ function Login() {
           )}
         </FormControl>
 
-        <FormControl mt={5} mb={5} isRequired isInvalid={isPasswordError}>
+        <FormControl
+          width="80vw"
+          mt={5}
+          mb={5}
+          isRequired
+          isInvalid={isPasswordError}
+        >
           <FormLabel>Password</FormLabel>
           <Input
             type="password"
@@ -144,28 +158,32 @@ function Login() {
           )}
         </FormControl>
 
-        <Button
-          type="submit"
-          colorScheme="teal"
-          size="md"
-          mr={10}
-          mt={5}
-          mb={5}
-        >
-          Sign In
-        </Button>
+        <Flex>
+          <Button
+            type="submit"
+            colorScheme="teal"
+            size="md"
+            mr={10}
+            mt={5}
+            mb={5}
+          >
+            Sign In
+          </Button>
 
-        <Checkbox
-          colorScheme="teal"
-          id="persist"
-          onChange={handleToggle}
-          isChecked={persist}
-          ml={10}
-          mt={5}
-          mb={5}
-        >
-          Trust This Device
-        </Checkbox>
+          <Spacer />
+
+          <Checkbox
+            colorScheme="teal"
+            id="persist"
+            onChange={handleToggle}
+            isChecked={persist}
+            ml={10}
+            mt={5}
+            mb={5}
+          >
+            Trust This Device
+          </Checkbox>
+        </Flex>
       </form>
       <Link to="/">
         <Box>

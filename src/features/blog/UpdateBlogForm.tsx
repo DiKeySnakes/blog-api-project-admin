@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react"
-import { useAddNewBlogMutation } from "./blogApiSlice"
-import { useNavigate } from "react-router-dom"
+import { useUpdateBlogMutation } from "./blogApiSlice"
+import { useParams, useNavigate } from "react-router-dom"
+import { IBlog } from "./blogApiSlice"
 import useTitle from "../../hooks/useTitle"
 import ErrorHandler from "../../components/ErrorHandler"
 import {
@@ -16,17 +17,20 @@ import {
   Button,
 } from "@chakra-ui/react"
 
-const NewBlogForm = () => {
+const UpdateBlogForm = (params: { blog: IBlog }) => {
+  const pageParams = useParams()
+  const _id = pageParams.id
+
   useTitle("Create blog")
 
-  const [addNewBlog, { isError, isSuccess, error }] = useAddNewBlogMutation()
+  const [updateBlog, { isError, isSuccess, error }] = useUpdateBlogMutation()
 
   const navigate = useNavigate()
 
-  const [image, setImage] = useState("")
-  const [title, setTitle] = useState("")
-  const [description, setDescription] = useState("")
-  const [content, setContent] = useState("")
+  const [image, setImage] = useState(params.blog.image)
+  const [title, setTitle] = useState(params.blog.title)
+  const [description, setDescription] = useState(params.blog.description)
+  const [content, setContent] = useState(params.blog.content)
 
   useEffect(() => {
     if (isSuccess && !isError) {
@@ -34,9 +38,9 @@ const NewBlogForm = () => {
       setTitle("")
       setDescription("")
       setContent("")
-      navigate(`/blog/blogs`)
+      navigate(`/blog/${_id}`)
     }
-  }, [isSuccess, isError, navigate])
+  }, [isSuccess, isError, _id, navigate])
 
   const onImageChanged = (e: React.ChangeEvent<HTMLInputElement>) =>
     setImage(e.target.value)
@@ -52,7 +56,7 @@ const NewBlogForm = () => {
 
   const onSaveBlogClicked = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    await addNewBlog({ image, title, description, content })
+    await updateBlog({ _id, image, title, description, content })
   }
 
   const isImageError = image === ""
@@ -65,7 +69,7 @@ const NewBlogForm = () => {
       <ErrorHandler error={error} />
 
       <Heading color="gray.800" mt={5}>
-        You can create a new blog here
+        You can update this blog here
       </Heading>
 
       <form onSubmit={onSaveBlogClicked}>
@@ -148,7 +152,7 @@ const NewBlogForm = () => {
         >
           <FormLabel>Content</FormLabel>
           <Textarea
-            size="lg"
+            size="9xl"
             id="content"
             name="content"
             value={content}
@@ -164,7 +168,7 @@ const NewBlogForm = () => {
 
         <Box display="flex" alignItems="center" justifyContent="center">
           <Button type="submit" colorScheme="teal" size="md" mt={5} mb={5}>
-            Create new blog
+            Update blog
           </Button>
         </Box>
       </form>
@@ -173,4 +177,4 @@ const NewBlogForm = () => {
 
   return pageContent
 }
-export default NewBlogForm
+export default UpdateBlogForm
