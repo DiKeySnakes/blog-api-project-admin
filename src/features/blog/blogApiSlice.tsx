@@ -93,6 +93,14 @@ export const blogApiSlice = apiSlice.injectEndpoints({
       }),
       invalidatesTags: [{ type: "Comment", id: "LIST" }],
     }),
+    publishBlog: builder.mutation({
+      query: (id) => ({
+        url: `/blog/publish/${id}`,
+        method: "PATCH",
+        body: { id },
+      }),
+      invalidatesTags: [{ type: "Blog", id: "LIST" }],
+    }),
   }),
 })
 
@@ -101,4 +109,5 @@ export const {
   useGetDetailedBlogQuery,
   useAddNewBlogMutation,
   useUpdateBlogMutation,
+  usePublishBlogMutation,
 } = blogApiSlice

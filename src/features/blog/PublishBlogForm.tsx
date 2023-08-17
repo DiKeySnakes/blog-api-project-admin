@@ -1,32 +1,30 @@
 import { useEffect } from "react"
-import { useDeleteCommentMutation } from "./commentApiSlice"
+import { usePublishBlogMutation } from "./blogApiSlice"
 import { useNavigate, useParams } from "react-router-dom"
+import { IBlog } from "./blogApiSlice"
 import useTitle from "../../hooks/useTitle"
 import ErrorHandler from "../../components/ErrorHandler"
 import { Box, Container, Heading, Input, Button } from "@chakra-ui/react"
 
-const DeleteCommentForm = () => {
-  useTitle("Delete comment")
+const PublishBlogForm = (params: { blog: IBlog }) => {
+  useTitle("Publish blog")
 
-  const params = useParams()
-  const id = params.id
+  const pageParams = useParams()
+  const id = pageParams.id
 
-  const [deleteComment, { isError, isSuccess, error }] =
-    useDeleteCommentMutation()
+  const [publishBlog, { isError, isSuccess, error }] = usePublishBlogMutation()
 
   const navigate = useNavigate()
 
   useEffect(() => {
     if (isSuccess && !isError) {
-      navigate(`/blog/blog`)
+      navigate(`/blog/blogs`)
     }
   }, [isSuccess, isError, navigate])
 
-  const onDeleteCommentClicked = async (
-    e: React.FormEvent<HTMLFormElement>,
-  ) => {
+  const onPublishBlogClicked = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    await deleteComment({ id })
+    await publishBlog(id)
   }
 
   const pageContent = (
@@ -34,15 +32,17 @@ const DeleteCommentForm = () => {
       <ErrorHandler error={error} />
 
       <Heading color="gray.800" mt={5}>
-        Do you really want to delete this comment?
+        Do you really want to change
+        <br />
+        published property of this blog?
       </Heading>
 
-      <form onSubmit={onDeleteCommentClicked}>
+      <form onSubmit={onPublishBlogClicked}>
         <Input type="text" id="content" name="content" hidden />
 
         <Box display="flex" alignItems="center" justifyContent="center">
           <Button type="submit" colorScheme="teal" size="md" mt={5} mb={5}>
-            Delete comment
+            Submit
           </Button>
         </Box>
       </form>
@@ -51,4 +51,4 @@ const DeleteCommentForm = () => {
 
   return pageContent
 }
-export default DeleteCommentForm
+export default PublishBlogForm

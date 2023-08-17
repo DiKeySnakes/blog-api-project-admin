@@ -15,6 +15,9 @@ import {
   Image,
   Box,
   Center,
+  Flex,
+  Spacer,
+  Button,
 } from "@chakra-ui/react"
 
 const BlogsList = () => {
@@ -88,7 +91,7 @@ const BlogsList = () => {
               alt="Latte"
             />
 
-            <Stack>
+            <Stack w="100%">
               <CardBody>
                 <ReactRouterLink to={`/blog/${blog._id}`}>
                   <Heading size="md">{blog.title}</Heading>
@@ -97,13 +100,29 @@ const BlogsList = () => {
                 <Text py="2">{blog.description}</Text>
               </CardBody>
 
-              <CardFooter>
-                <Box mr={2}>
-                  <Text as="b">by MariiaN </Text>
-                </Box>
-                <Box ml={2}>
-                  <Text>{format(new Date(blog.createdAt), "dd MMM yyyy")}</Text>
-                </Box>
+              <CardFooter w="100%">
+                <Flex w="100%">
+                  <Flex>
+                    <Box mr={2}>
+                      <Text as="b">by MariiaN </Text>
+                    </Box>
+                    <Box ml={2}>
+                      <Text>
+                        {format(new Date(blog.createdAt), "dd MMM yyyy")}
+                      </Text>
+                    </Box>
+                  </Flex>
+
+                  <Spacer />
+
+                  <Box>
+                    <ReactRouterLink to={`/blog/publish/${blog._id}`}>
+                      <Button colorScheme={blog.published ? "red" : "teal"}>
+                        {blog.published ? "Unpublish" : "Publish"}
+                      </Button>
+                    </ReactRouterLink>
+                  </Box>
+                </Flex>
               </CardFooter>
             </Stack>
           </Card>

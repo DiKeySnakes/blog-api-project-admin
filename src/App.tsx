@@ -7,6 +7,7 @@ import Login from "./features/auth/Login"
 import Logout from "./features/auth/Logout"
 import NewBlogForm from "./features/blog/NewBlogForm"
 import UpdateBlog from "./features/blog/UpdateBlog"
+import PublishBlog from "./features/blog/PublishBlog"
 import NewUserForm from "./features/user/NewUserForm"
 import NewCommentForm from "./features/comment/NewCommentForm"
 import DeleteCommentForm from "./features/comment/DeleteCommentForm"
@@ -34,6 +35,7 @@ function App() {
           <Route element={<RequireAuth allowedRoles={[ROLES.Admin]} />}>
             <Route path="/blog/create_blog" element={<NewBlogForm />} />
             <Route path="/blog/update/:id" element={<UpdateBlog />} />
+            <Route path="/blog/publish/:id" element={<PublishBlog />} />
             <Route path="/comment/delete/:id" element={<DeleteCommentForm />} />
           </Route>
         </Route>{" "}
