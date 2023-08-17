@@ -30,7 +30,7 @@ export default function Nav() {
     >
       <Flex>
         <Box>
-          <ChakraLink as={ReactRouterLink} to="/blog/blogs_all" mr={15}>
+          <ChakraLink as={ReactRouterLink} to="/blog/blogs" mr={15}>
             <Heading mt={2} mb={2}>
               Blog API Project
             </Heading>
@@ -53,8 +53,13 @@ export default function Nav() {
           <ChakraLink
             as={ReactRouterLink}
             to={id ? `/comment/create/${id}` : "/auth/sign_up"}
+            mr={15}
           >
             {id ? <Text as="b">Comment</Text> : <Text as="b">Sign Up</Text>}
+          </ChakraLink>
+
+          <ChakraLink as={ReactRouterLink} to="/blog/create_blog">
+            <Text as="b">Create New Blog</Text>
           </ChakraLink>
         </Center>
       </Flex>

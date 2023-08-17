@@ -17,6 +17,9 @@ import {
   Image,
   Box,
   Center,
+  Button,
+  Flex,
+  Spacer,
 } from "@chakra-ui/react"
 
 function Blog({ id }: { id?: string }) {
@@ -89,9 +92,7 @@ function Blog({ id }: { id?: string }) {
             />
 
             <CardBody>
-              <ReactRouterLink to={`/blog/${data.blog._id}`}>
-                <Text py="2">{data.blog.content}</Text>
-              </ReactRouterLink>
+              <Text py="2">{data.blog.content}</Text>
             </CardBody>
 
             <CardFooter>
@@ -129,22 +130,32 @@ function Blog({ id }: { id?: string }) {
             overflow="hidden"
             variant="outline"
           >
-            <Stack>
+            <Stack w="100%">
               <CardBody>
-                <ReactRouterLink to={`/comment/${comment._id}`}>
-                  <Text py="2">{comment.content}</Text>
-                </ReactRouterLink>
+                <Text py="2">{comment.content}</Text>
               </CardBody>
 
-              <CardFooter>
-                <Box mr={2}>
-                  <Text as="b">by {comment.user.username} </Text>
-                </Box>
-                <Box ml={2}>
-                  <Text>
-                    {format(new Date(comment.createdAt), "dd MMM yyyy")}
-                  </Text>
-                </Box>
+              <CardFooter w="100%">
+                <Flex w="100%">
+                  <Flex>
+                    <Box mr={5}>
+                      <Text as="b">by {comment.user.username} </Text>
+                    </Box>
+                    <Box>
+                      <Text>
+                        {format(new Date(comment.createdAt), "dd MMM yyyy")}
+                      </Text>
+                    </Box>
+                  </Flex>
+
+                  <Spacer />
+
+                  <Box>
+                    <ReactRouterLink to={`/comment/delete/${comment._id}`}>
+                      <Button colorScheme="red">Delete</Button>
+                    </ReactRouterLink>
+                  </Box>
+                </Flex>
               </CardFooter>
             </Stack>
           </Card>

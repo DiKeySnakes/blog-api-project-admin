@@ -30,7 +30,7 @@ const Public = () => {
           </ChakraLink>
         </Flex>
         <Center mb={5}>
-          <ChakraLink as={ReactRouterLink} to="/blog/blogs_all" mr={15}>
+          <ChakraLink as={ReactRouterLink} to="/blog/blogs" mr={15}>
             <Heading as="h3" size="lg" color="teal">
               All Blogs
             </Heading>

@@ -39,7 +39,7 @@ export const blogApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     getALLBlogs: builder.query<BlogsResponse, void>({
       query: () => ({
-        url: "/blog/blogs_all",
+        url: "/blog/blogs",
         validateStatus: (response, result) => {
           return response.status === 200 && !result.isError
         },
@@ -73,7 +73,21 @@ export const blogApiSlice = apiSlice.injectEndpoints({
             ]
           : [{ type: "Comment", id: "LIST" }],
     }),
+    addNewBlog: builder.mutation({
+      query: (initialBlog) => ({
+        url: "/blog/create_blog",
+        method: "POST",
+        body: {
+          ...initialBlog,
+        },
+      }),
+      invalidatesTags: [{ type: "Blog", id: "LIST" }],
+    }),
   }),
 })
 
-export const { useGetALLBlogsQuery, useGetDetailedBlogQuery } = blogApiSlice
+export const {
+  useGetALLBlogsQuery,
+  useGetDetailedBlogQuery,
+  useAddNewBlogMutation,
+} = blogApiSlice

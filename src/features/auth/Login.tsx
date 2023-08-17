@@ -53,7 +53,7 @@ function Login() {
       dispatch(setCredentials({ accessToken }))
       setUsername("")
       setPassword("")
-      navigate("/blog/blogs_all")
+      navigate("/blog/blogs")
     } catch (err: any) {
       if (!err.status) {
         setErrMsg("No Server Response")
