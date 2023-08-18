@@ -111,7 +111,7 @@ const UsersList = () => {
                   <Spacer />
 
                   <Box>
-                    <ReactRouterLink to={`/blog/publish/${user._id}`}>
+                    <ReactRouterLink to={`/user/active/${user._id}`}>
                       <Button colorScheme={user.active ? "red" : "teal"}>
                         {user.active ? "Deactivate" : "Activate"}
                       </Button>
