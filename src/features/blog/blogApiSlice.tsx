@@ -13,11 +13,14 @@ export interface IBlog {
 }
 
 export interface IUser {
+  _id: string
   username: string
   email: string
   password: string
   roles: [string]
   active: boolean
+  createdAt: Date
+  updatedAt: Date
 }
 
 export interface IComment {

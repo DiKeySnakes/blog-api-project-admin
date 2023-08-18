@@ -1,18 +1,25 @@
 import { apiSlice } from "../../app/api/apiSlice"
+import { IUser } from "../blog/blogApiSlice"
 
-// interface IUser {
-//   _id: string
-//   username: string
-//   email: string
-//   password: string
-//   roles: [string]
-//   active: boolean
-//   createdAt: Date
-//   updatedAt: Date
-// }
+export type UsersResponse = IUser[]
 
 export const userApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
+    getUsers: builder.query<UsersResponse, void>({
+      query: () => ({
+        url: "/user/users",
+        validateStatus: (response, result) => {
+          return response.status === 200 && !result.isError
+        },
+      }),
+      providesTags: (result) =>
+        result
+          ? [
+              { type: "User", id: "LIST" },
+              ...result.map(({ _id }) => ({ type: "User" as const, _id })),
+            ]
+          : [{ type: "User", id: "LIST" }],
+    }),
     addNewUser: builder.mutation({
       query: (initialUserData) => ({
         url: "/auth/sign_up",
@@ -29,4 +36,4 @@ export const userApiSlice = apiSlice.injectEndpoints({
   }),
 })
 
-export const { useAddNewUserMutation } = userApiSlice
+export const { useGetUsersQuery, useAddNewUserMutation } = userApiSlice
