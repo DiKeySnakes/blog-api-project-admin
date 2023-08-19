@@ -11,7 +11,7 @@ import { RootState } from "../store"
 import { QueryReturnValue } from "@reduxjs/toolkit/dist/query/baseQueryTypes"
 
 const baseQuery = fetchBaseQuery({
-  baseUrl: "http://localhost:4000",
+  baseUrl: "https://blog-api-project-server.onrender.com",
   credentials: "include",
   prepareHeaders: (headers, { getState }) => {
     const token = (getState() as RootState).auth.token
