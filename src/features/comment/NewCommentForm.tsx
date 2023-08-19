@@ -42,10 +42,6 @@ const NewCommentForm = () => {
     }
   }, [isSuccess, isError, blog, navigate])
 
-  // useEffect(() => {
-  //   if (data) console.log(data)
-  // }, [data])
-
   const onContentChanged = (e: React.ChangeEvent<HTMLInputElement>) =>
     setContent(e.target.value)
 

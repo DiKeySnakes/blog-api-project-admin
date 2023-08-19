@@ -10,6 +10,7 @@ import UpdateBlog from "./features/blog/UpdateBlog"
 import PublishBlog from "./features/blog/PublishBlog"
 import UsersList from "./features/user/UsersList"
 import UpdateUserActiveForm from "./features/user/UpdateUserActiveForm"
+import UpdateUserRolesForm from "./features/user/UpdateUserRolesForm"
 import NewUserForm from "./features/user/NewUserForm"
 import NewCommentForm from "./features/comment/NewCommentForm"
 import DeleteCommentForm from "./features/comment/DeleteCommentForm"
@@ -41,6 +42,7 @@ function App() {
             <Route path="/comment/delete/:id" element={<DeleteCommentForm />} />
             <Route path="/user/users" element={<UsersList />} />
             <Route path="/user/active/:id" element={<UpdateUserActiveForm />} />
+            <Route path="/user/roles/:id" element={<UpdateUserRolesForm />} />
           </Route>
         </Route>{" "}
         {/* End Protected Routes */}

@@ -2,6 +2,7 @@ import { useGetUsersQuery } from "./userApiSlice"
 import useTitle from "../../hooks/useTitle"
 import { Link as ReactRouterLink } from "react-router-dom"
 import format from "date-fns/format"
+import { nanoid } from "@reduxjs/toolkit"
 import ErrorHandler from "../../components/ErrorHandler"
 import {
   Spinner,
@@ -18,6 +19,7 @@ import {
   Flex,
   Spacer,
   Button,
+  Tooltip,
 } from "@chakra-ui/react"
 
 const UsersList = () => {
@@ -87,21 +89,36 @@ const UsersList = () => {
 
             <Stack w="100%">
               <CardBody>
-                <ReactRouterLink to={`/user/${user._id}`}>
-                  <Heading size="md">{user.username}</Heading>
-                </ReactRouterLink>
+                <Tooltip
+                  label="Click to change roles"
+                  placement="top-start"
+                  bg="orange.500"
+                >
+                  <ReactRouterLink to={`/user/roles/${user._id}`}>
+                    <Heading size="md">{user.username}</Heading>
+                  </ReactRouterLink>
+                </Tooltip>
 
-                <Text py="2">{user.email}</Text>
+                {user.roles.map((role) => (
+                  <Text key={nanoid()} mr={3} as="b" color="orange.500">
+                    {role}
+                  </Text>
+                ))}
+                <Text py="2" color="green.500">
+                  {user.email}
+                </Text>
               </CardBody>
 
               <CardFooter w="100%">
                 <Flex w="100%">
                   <Flex>
                     <Box mr={2}>
-                      <Text as="b">{user.active ? "Active" : "Banned"}</Text>
+                      <Text as="b" color={user.active ? "teal" : "red"}>
+                        {user.active ? "Active" : "Banned"}
+                      </Text>
                     </Box>
                     <Box ml={2}>
-                      <Text as="i">
+                      <Text as="i" color="blue.500">
                         Created at:{" "}
                         {format(new Date(user.createdAt), "dd MMM yyyy")}
                       </Text>
