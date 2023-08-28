@@ -81,7 +81,7 @@ function Login() {
   if (isLoading)
     return (
       <Container maxW="9xl" centerContent>
-        <Box>
+        <Box mt={5}>
           <Center>
             <Spinner
               thickness="4px"
