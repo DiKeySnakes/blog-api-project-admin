@@ -70,7 +70,7 @@ const PersistLogin = () => {
     console.log("error")
     content = (
       <Container maxW="9xl" mt={5} centerContent>
-        <Box>
+        <Box mt={5}>
           <ErrorHandler error={error} />
           <Link to="/auth/login">
             <Text as="b">Please login again</Text>
