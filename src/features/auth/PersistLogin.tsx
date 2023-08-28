@@ -52,7 +52,7 @@ const PersistLogin = () => {
     console.log("loading")
     content = (
       <Container maxW="9xl" centerContent>
-        <Box>
+        <Box mt={5}>
           <Center>
             <Spinner
               thickness="4px"
@@ -70,7 +70,7 @@ const PersistLogin = () => {
     console.log("error")
     content = (
       <Container maxW="9xl" mt={5} centerContent>
-        <Box mt={5}>
+        <Box>
           <ErrorHandler error={error} />
           <Link to="/auth/login">
             <Text as="b">Please login again</Text>
